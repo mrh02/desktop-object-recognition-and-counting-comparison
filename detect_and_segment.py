@@ -1,3 +1,5 @@
+import json
+
 from pathlib import Path
 from ultralytics import YOLO, SAM
 
@@ -35,7 +37,20 @@ else:
     print("\nYOLO物品统计：")
     for name, number in counts.items():
         print(f"{name}：{number}个")
+    # 保存YOLO计数结果
+    record = {
+        "model": "yolo11n",
+        "image_path": str(image_path),
+        "counts": counts,
+    }
 
+    result_path = output_dir / "yolo_result.json"
+    result_path.write_text(
+        json.dumps(record, ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
+
+    print(f"YOLO计数已保存到：{result_path}")
     # 第二步：将检测框自动传给SAM
     segmenter = SAM(str(project_dir / "sam_b.pt"))
 

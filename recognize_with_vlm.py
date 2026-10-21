@@ -37,6 +37,15 @@ client = OpenAI(
     max_retries=0,
 )
 
+# 开始新任务前，清除上次结果，避免失败后误用旧数据
+output_dir = project_dir / "outputs"
+output_dir.mkdir(exist_ok=True)
+
+for filename in ("vlm_result.json", "comparison.json"):
+    old_result = output_dir / filename
+    if old_result.exists():
+        old_result.unlink()
+        
 print("正在发送图片，请等待模型回答……")
 start_time = time.perf_counter()
 response = client.chat.completions.create(

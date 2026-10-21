@@ -4,6 +4,16 @@ from pathlib import Path
 project_dir = Path(__file__).resolve().parent
 output_dir = project_dir / "outputs"
 
+# 比较前，检查两种方案是否都已生成结果
+for filename in ("yolo_result.json", "vlm_result.json"):
+    result_file = output_dir / filename
+
+    if not result_file.is_file():
+        raise SystemExit(
+            f"缺少结果文件：{filename}。"
+            "请先成功运行对应的识别程序，再进行对比。"
+        )
+        
 # 读取两种方案保存的结果
 yolo = json.loads(
     (output_dir / "yolo_result.json").read_text(encoding="utf-8")

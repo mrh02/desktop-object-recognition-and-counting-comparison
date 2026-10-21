@@ -1,0 +1,12 @@
+# Python环境和缓存
+.venv/
+__pycache__/
+*.pyc
+
+# 模型权重和生成结果
+*.pt
+*.pth
+outputs/
+
+# 本地密钥
+.env

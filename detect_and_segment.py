@@ -28,6 +28,27 @@ boxes = detection.boxes.xyxy.cpu().tolist()
 
 if not boxes:
     print("没有检测到物品，本次不进行分割。")
+
+    # 保存本次的空计数，覆盖上一次的结果
+    record = {
+        "model": "yolo11n",
+        "image_path": str(image_path),
+        "counts": {},
+    }
+
+    result_path = output_dir / "yolo_result.json"
+    result_path.write_text(
+        json.dumps(record, ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
+
+    # 删除旧分割图，避免将它误认为本次结果
+    segmented_path = output_dir / "all_segmented.jpg"
+    if segmented_path.exists():
+        segmented_path.unlink()
+
+    print(f"空计数结果已保存到：{result_path}")
+
 else:
     # 显示YOLO识别到的类别和数量
     counts = {}

@@ -1,10 +1,13 @@
+from config import IMAGE_PATH
 import json
 
 from pathlib import Path
 from ultralytics import YOLO, SAM
 
 project_dir = Path(__file__).resolve().parent
-image_path = r"C:\Users\moruohan\Desktop\desk.jpg"
+image_path = IMAGE_PATH
+if not image_path.is_file():
+    raise FileNotFoundError(f"找不到照片：{image_path}")
 
 output_dir = project_dir / "outputs"
 output_dir.mkdir(exist_ok=True)
@@ -13,7 +16,7 @@ output_dir.mkdir(exist_ok=True)
 detector = YOLO(str(project_dir / "yolo11n.pt"))
 
 detection = detector(
-    image_path,
+    str(image_path),
     device="cpu",
     imgsz=1280
 )[0]

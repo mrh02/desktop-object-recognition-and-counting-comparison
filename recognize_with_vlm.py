@@ -1,3 +1,5 @@
+from config import IMAGE_PATH
+
 import json
 import time
 
@@ -19,7 +21,10 @@ if not api_key or not base_url:
     raise ValueError("请检查.env中的密钥和接口地址是否已经填写并保存。")
 
 # 读取原照片，转换成接口支持的Base64格式
-image_path = Path(r"C:\Users\moruohan\Desktop\desk.jpg")
+image_path = IMAGE_PATH
+if not image_path.is_file():
+    raise FileNotFoundError(f"找不到照片：{image_path}")
+    
 image_base64 = base64.b64encode(
     image_path.read_bytes()
 ).decode("utf-8")

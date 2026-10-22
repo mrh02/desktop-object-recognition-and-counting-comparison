@@ -1,0 +1,14 @@
+{
+  "01_simple.jpg": {
+    "scene": "简单场景",
+    "counts": {"mouse": 1}
+  },
+  "02_simple.jpg": {
+    "scene": "简单场景",
+    "counts": {"cup": 1}
+  },
+  "03_simple.jpg": {
+    "scene": "简单场景",
+    "counts": {"cup": 2, "mouse": 1}
+  }
+}

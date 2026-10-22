@@ -10,5 +10,25 @@
   "03_simple.jpg": {
     "scene": "简单场景",
     "counts": {"cup": 2, "mouse": 1}
+  },
+  "04_multiple.jpg": {
+    "scene": "多类别场景",
+    "counts": {
+      "cup": 1,
+      "mouse": 1,
+      "scissors": 1
+    }
+  },
+  "05_multiple.jpg": {
+  "scene": "多类别场景",
+  "counts": {"cup": 1, "mouse": 1, "scissors": 1}
+  },
+  "06_clutter.jpg": {
+  "scene": "桌面背景与线缆干扰",
+  "counts": {"cup": 1, "mouse": 1, "scissors": 1}
+  },
+  "07_occlusion.jpg": {
+  "scene": "杯子遮挡剪刀",
+  "counts": {"cup": 1, "mouse": 1, "scissors": 1}
   }
 }

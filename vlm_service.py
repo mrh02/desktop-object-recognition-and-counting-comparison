@@ -12,7 +12,7 @@ from openai import OpenAI
 def recognize_image(image):
     """接收网页上传的照片，返回物品统计文字。"""
     if image is None:
-        return "请先上传一张照片。"
+        return "请先上传一张照片。", None
 
     project_dir = Path(__file__).resolve().parent
     load_dotenv(project_dir / ".env")
@@ -21,7 +21,7 @@ def recognize_image(image):
     base_url = os.getenv("DASHSCOPE_BASE_URL")
 
     if not api_key or not base_url:
-        return "缺少配置，请检查本地.env文件。"
+        return "缺少配置，请检查本地.env文件。", None
 
     # 将上传的图片统一转换成JPEG
     buffer = io.BytesIO()
@@ -104,15 +104,15 @@ def recognize_image(image):
         if response.usage:
             lines.append(f"Token用量：{response.usage.total_tokens}")
 
-        return "\n".join(lines)
+        return "\n".join(lines), counts
 
     except (json.JSONDecodeError, ValueError):
-        return "模型返回格式不符合要求，本次未生成有效统计。"
+        return "模型返回格式不符合要求，本次未生成有效统计。", None
+
     except Exception as error:
-        # 只显示错误类型，避免把敏感配置带到网页上
         return (
             f"调用失败：{type(error).__name__}。"
             "请检查网络、模型权限和本地配置。"
-        )
+        ), None
     finally:
         client.close()

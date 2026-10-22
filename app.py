@@ -21,7 +21,7 @@ segmenter = SAM(str(PROJECT_DIR / "sam_b.pt"))
 
 def detect_image(image):
     if image is None:
-        return None, None, "请先上传一张照片。"
+        return None, None, "请先上传一张照片。", None
 
     # Gradio传入PIL图片，转换为RGB数组
     rgb_image = np.array(image.convert("RGB"))
@@ -70,10 +70,37 @@ def detect_image(image):
         segmented_image = None
         summary += "\n未检测到物品，本次不进行分割。"
 
-    return annotated_image, segmented_image, summary
+    return annotated_image, segmented_image, summary, counts
 
+def compare_counts(yolo_counts, vlm_counts):
+    if yolo_counts is None or vlm_counts is None:
+        return [], "请先完成当前照片的本地检测和大模型识别。"
 
+    categories = sorted(set(yolo_counts) | set(vlm_counts))
+    rows = []
+
+    for name in categories:
+        yolo_number = yolo_counts.get(name, 0)
+        vlm_number = vlm_counts.get(name, 0)
+
+        rows.append([
+            name,
+            yolo_number,
+            vlm_number,
+            "一致" if yolo_number == vlm_number else "不一致",
+        ])
+
+    if not categories:
+        message = "两种方案均返回0件物品，请人工核对。"
+    elif yolo_counts == vlm_counts:
+        message = "计数全部一致，但不代表一定正确，请人工核对。"
+    else:
+        message = "存在计数差异，请结合原图检查漏检、误检或类别名称差异。"
+
+    return rows, message
 with gr.Blocks() as demo:
+    yolo_state = gr.State(value=None)
+    vlm_state = gr.State(value=None)
     gr.Markdown("# 桌面物品识别与清点对比系统")
     gr.Markdown("上传照片，点击按钮查看YOLO检测、物品计数与SAM分割结果。")
     with gr.Row():
@@ -91,9 +118,9 @@ with gr.Blocks() as demo:
         )
 
     segmented_output = gr.Image(
-    label="SAM分割结果",
-    interactive=False,
-    format="png",
+        label="SAM分割结果",
+        interactive=False,
+        format="png",
     )
 
     detect_button = gr.Button("检测并分割")
@@ -106,14 +133,24 @@ with gr.Blocks() as demo:
     detect_button.click(
         fn=detect_image,
         inputs=input_image,
-        outputs=[output_image, segmented_output, result_text],
+        outputs=[
+            output_image,
+            segmented_output,
+            result_text,
+            yolo_state,
+        ],
     )
 
     # 换图时清除上一张照片的结果
     input_image.change(
-        fn=lambda: (None, None, ""),
-        inputs=None,
-        outputs=[output_image, segmented_output, result_text],
+    fn=lambda: (None, None, "", None),
+    inputs=None,
+    outputs=[
+            output_image,
+            segmented_output,
+            result_text,
+            yolo_state,
+        ],
     )
 
     gr.Markdown("## 多模态大模型识别")
@@ -129,15 +166,59 @@ with gr.Blocks() as demo:
     vlm_button.click(
         fn=recognize_image,
         inputs=input_image,
-        outputs=vlm_text,
+        outputs=[vlm_text, vlm_state],
         concurrency_limit=1,
     )
 
     # 换图时清除旧的大模型回答
     input_image.change(
-        fn=lambda: "",
+        fn=lambda: ("", None),
         inputs=None,
-        outputs=vlm_text,
+        outputs=[vlm_text, vlm_state],
+    )
+    
+    gr.Markdown("## 两种方案计数对比")
+
+    compare_button = gr.Button("比较当前结果")
+
+    comparison_table = gr.Dataframe(
+        headers=["类别", "YOLO数量", "大模型数量", "是否一致"],
+        datatype=["str", "number", "number", "str"],
+        value=[],
+        interactive=False,
+    )
+
+    comparison_text = gr.Textbox(
+        label="对比说明",
+        interactive=False,
+    )
+
+    compare_button.click(
+        fn=compare_counts,
+        inputs=[yolo_state, vlm_state],
+        outputs=[comparison_table, comparison_text],
+    )
+
+    # 换图或重新识别时，清除旧对比表
+    def clear_comparison():
+        return [], ""
+
+    input_image.change(
+        fn=clear_comparison,
+        inputs=None,
+        outputs=[comparison_table, comparison_text],
+    )
+
+    detect_button.click(
+        fn=clear_comparison,
+        inputs=None,
+        outputs=[comparison_table, comparison_text],
+    )
+
+    vlm_button.click(
+        fn=clear_comparison,
+        inputs=None,
+        outputs=[comparison_table, comparison_text],
     )
 if __name__ == "__main__":
     demo.launch(

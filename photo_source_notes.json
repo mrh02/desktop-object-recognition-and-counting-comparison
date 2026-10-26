@@ -1,0 +1,64 @@
+{
+  "86303d50fd99a375ea86c9dc6c2d184c760e2d5063bc9ada4318bf1fa5454fdd": {
+    "source_type": "synthetic_AI_mark_visible",
+    "observation": "AI-generated mark visible in assistant-inspected import contact sheet on 2026-10-23; original image is retained.",
+    "training_use_allowed_by_user": true,
+    "authorization_note": "User explicitly confirmed use of AI-generated training photos on 2026-10-23; normal label screening still applies."
+  },
+  "ffbc616c90ff5c6d4871d3b0933c0b29632c5c87bba2f193a46b57544d9a2819": {
+    "source_type": "synthetic_AI_mark_visible",
+    "observation": "AI-generated mark visible in assistant-inspected import contact sheet on 2026-10-23; original image is retained.",
+    "training_use_allowed_by_user": true,
+    "authorization_note": "User explicitly confirmed use of AI-generated training photos on 2026-10-23; normal label screening still applies."
+  },
+  "9b7379816f606602721e843ecb7802d7293ab6d524b63ea84ef7897dd8066e16": {
+    "source_type": "synthetic_AI_mark_visible",
+    "observation": "AI-generated mark visible in assistant-inspected import contact sheet on 2026-10-23; original image is retained.",
+    "training_use_allowed_by_user": true,
+    "authorization_note": "User explicitly confirmed use of AI-generated training photos on 2026-10-23; normal label screening still applies."
+  },
+  "2f35358208ae658861698a944fb9e461cbffbb6e5cb5d07b76f61a7a17b02001": {
+    "source_type": "synthetic_AI_mark_visible",
+    "observation": "AI-generated mark visible in assistant-inspected import contact sheet on 2026-10-23; original image is retained.",
+    "training_use_allowed_by_user": true,
+    "authorization_note": "User explicitly confirmed use of AI-generated training photos on 2026-10-23; normal label screening still applies."
+  },
+  "45f3ce26e7c9fed50b7bf16e22033b8dd5099c4ec68da123b520374bc4860f3b": {
+    "source_type": "synthetic_AI_mark_visible",
+    "observation": "AI-generated mark visible in assistant-inspected import contact sheet on 2026-10-23; original image is retained.",
+    "training_use_allowed_by_user": true,
+    "authorization_note": "User explicitly confirmed use of AI-generated training photos on 2026-10-23; normal label screening still applies."
+  },
+  "218443166aedbbea25eab3f5d78aab99232ff5c78686611f88d0b30d8ced083b": {
+    "source_type": "synthetic_AI_mark_visible",
+    "observation": "AI-generated mark visible in assistant-inspected import contact sheet on 2026-10-23; original image is retained.",
+    "training_use_allowed_by_user": true,
+    "authorization_note": "User explicitly confirmed use of AI-generated training photos on 2026-10-23; normal label screening still applies."
+  },
+  "f039ad1d23efb073dcbef6e888094addab05978f349e5949dbdeab2d72306194": {
+    "source_type": "synthetic_AI_mark_visible",
+    "observation": "AI-generated mark visible in assistant-inspected import contact sheet on 2026-10-23; original image is retained.",
+    "training_use_allowed_by_user": true,
+    "authorization_note": "User explicitly confirmed use of AI-generated training photos on 2026-10-23; normal label screening still applies."
+  },
+  "57f7bc60444225095d926375271b88714c4bb382fc2dfff40f59103f7c7719f0": {
+    "source_type": "previously_used_development_photo",
+    "observation": "Matches the previously discussed 13-17 development photos; must not be presented as new independent acceptance data."
+  },
+  "090c172e7cb9464ab62fb0cf6645e6f3c7264a99057603cecbf68c46585938bd": {
+    "source_type": "previously_used_development_photo",
+    "observation": "Matches the previously discussed 13-17 development photos; must not be presented as new independent acceptance data."
+  },
+  "38bd3af55ee1c02a800498a083ceeb79e9fe73d3982ec7ac266cfbbe6a5acd6a": {
+    "source_type": "previously_used_development_photo",
+    "observation": "Matches the previously discussed 13-17 development photos; must not be presented as new independent acceptance data."
+  },
+  "9052a26fc96f2352478b69592fca0b975aff3b3d07a795d851a850e298bd0a05": {
+    "source_type": "previously_used_development_photo",
+    "observation": "Matches the previously discussed 13-17 development photos; must not be presented as new independent acceptance data."
+  },
+  "529062f932b7edd6c30d88b1e3f9c502c092868293bee652a3f110badef7f8ad": {
+    "source_type": "previously_used_development_photo",
+    "observation": "Matches the previously discussed 13-17 development photos; must not be presented as new independent acceptance data."
+  }
+}

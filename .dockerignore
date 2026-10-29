@@ -1,0 +1,8 @@
+# Allow only the runtime and dependency files copied by Dockerfile.
+**
+!Dockerfile
+!requirements.txt
+!requirements-docker.txt
+!app.py
+!vision_pipeline.py
+!vlm_service.py

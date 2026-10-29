@@ -96,4 +96,10 @@ with gr.Blocks() as demo:
                        outputs=[detected,segmented,local_text,local_state,local_file,cloud_text,cloud_state,cloud_file,table,comparison_text,comparison_file],queue=False)
 
 if __name__=='__main__':
-    demo.launch(server_name='127.0.0.1',server_port=7861,inbrowser=True,share=False,allowed_paths=APP_ALLOWED_PATHS)
+    demo.launch(
+        server_name=os.getenv('GRADIO_SERVER_NAME', '127.0.0.1'),
+        server_port=int(os.getenv('GRADIO_SERVER_PORT', '7861')),
+        inbrowser=os.getenv('APP_OPEN_BROWSER', '1').lower() in ('1', 'true', 'yes'),
+        share=False,
+        allowed_paths=APP_ALLOWED_PATHS,
+    )

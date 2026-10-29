@@ -1,0 +1,35 @@
+name: desktop-vision
+
+services:
+  web:
+    image: desktop-vision:stage3
+    build:
+      context: .
+    ports:
+      - "${APP_BIND_ADDRESS:-127.0.0.1}:${APP_PORT:-7863}:7861"
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      GRADIO_SERVER_NAME: 0.0.0.0
+      GRADIO_SERVER_PORT: "7861"
+      APP_OPEN_BROWSER: "0"
+      GRADIO_ANALYTICS_ENABLED: "False"
+    volumes:
+      - type: bind
+        source: ./yolo11s.pt
+        target: /app/yolo11s.pt
+        read_only: true
+        bind:
+          create_host_path: false
+      - type: bind
+        source: ./sam_b.pt
+        target: /app/sam_b.pt
+        read_only: true
+        bind:
+          create_host_path: false
+      - app_results:/app/outputs/app_runs
+    restart: unless-stopped
+
+volumes:
+  app_results:

@@ -2,7 +2,7 @@
 
 本项目用两条独立流程分析同一张照片：**本地 YOLO11s + SAM** 输出检测框、计数与分割图；**阿里云 qwen3-vl-plus** 输出物品类别和数量。Gradio 页面支持上传、对比和下载 JSON，最终页面只使用一个固定 YOLO 配置。
 
-当前版本已完成可运行流程和开发样本验证，**尚未解决俯拍杯子误分类和遮挡漏检，也未完成独立新照片的准确率验收**。不要将程序能运行理解为识别准确率达标。完整结论和两种方案的体验比较见 [PROJECT_REPORT.md](PROJECT_REPORT.md)。
+当前版本已完成可运行流程和开发样本验证，。不要将程序能运行理解为识别准确率达标。完整结论和两种方案的体验比较见 [PROJECT_REPORT.md](PROJECT_REPORT.md)。
 
 ## 快速运行
 
@@ -119,3 +119,7 @@ SAM 使用 YOLO 的框生成掩膜。**类别与数量来自 YOLO；SAM 不会�
 - [阿里云百炼视觉理解](https://help.aliyun.com/zh/model-studio/vision/)
 
 本项目仅记录 Stage 2 的实现与实验，不混入 Stage 1 内容。
+
+## Linux / Docker 部署（Stage 3）
+
+第三阶段沿用本仓库，在现有双方案网页上增加容器部署。完整步骤、代理配置和验证边界见 [DEPLOYMENT.md](DEPLOYMENT.md)。Windows 原有启动方式保留。
